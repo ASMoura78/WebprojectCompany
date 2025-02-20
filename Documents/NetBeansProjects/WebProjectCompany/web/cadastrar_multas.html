@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastrar Multas</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="form-container">
+        <h2>Cadastrar Multas</h2>
+        <form>
+            <input type="text" placeholder="Nome do Motorista Infrator" required>
+            <input type="text" placeholder="Veículo" required>
+            <input type="text" placeholder="Placa" required>
+            <input type="datetime-local" placeholder="Data e Hora da Infração" required>
+            <input type="text" placeholder="Local da Infração" required>
+            <textarea placeholder="Descrição da Infração" required></textarea>
+            <div class="button-group">
+                <button type="submit">Cadastrar</button>
+                <button type="button" onclick="window.location.href='menu.html'">Voltar</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
