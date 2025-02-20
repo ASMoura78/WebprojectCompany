@@ -35,7 +35,8 @@ public class CadastrarMotoristaServlet extends HttpServlet {
             throw new ServletException("Erro ao inserir dados no banco de dados", e);
         }
 
-        response.sendRedirect("sucesso.html");
+        response.sendRedirect(request.getContextPath() + "/sucesso.html");
     }
 }
+
 

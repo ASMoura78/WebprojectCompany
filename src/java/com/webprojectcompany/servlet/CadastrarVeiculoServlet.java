@@ -8,26 +8,28 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
+import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
+import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 @WebServlet("/cadastrar_veiculo")
-@MultipartConfig(maxFileSize = 16177215) // 16MB
+@MultipartConfig
 public class CadastrarVeiculoServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String modelo = request.getParameter("modelo");
         String placa = request.getParameter("placa");
         String cor = request.getParameter("cor");
         String observacoes = request.getParameter("observacoes");
-
         Part filePart = request.getPart("imagem");
-        InputStream inputStream = null;
-        if (filePart != null) {
-            inputStream = filePart.getInputStream();
-        }
+        String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
+        String uploadPath = getServletContext().getRealPath("") + File.separator + "uploads";
+        File uploadDir = new File(uploadPath);
+        if (!uploadDir.exists()) uploadDir.mkdir();
+        File file = new File(uploadPath, fileName);
+        filePart.write(file.getAbsolutePath());
 
         try (Connection connection = DatabaseConnection.getConnection()) {
             String sql = "INSERT INTO veiculo (modelo, placa, cor, imagem, observacoes) VALUES (?, ?, ?, ?, ?)";
@@ -35,9 +37,7 @@ public class CadastrarVeiculoServlet extends HttpServlet {
                 statement.setString(1, modelo);
                 statement.setString(2, placa);
                 statement.setString(3, cor);
-                if (inputStream != null) {
-                    statement.setBlob(4, inputStream);
-                }
+                statement.setString(4, fileName);
                 statement.setString(5, observacoes);
                 statement.executeUpdate();
             }
@@ -46,7 +46,8 @@ public class CadastrarVeiculoServlet extends HttpServlet {
             throw new ServletException("Erro ao inserir dados no banco de dados", e);
         }
 
-        response.sendRedirect("sucesso.html");
+        response.sendRedirect(request.getContextPath() + "/sucesso.html");
     }
 }
+
 

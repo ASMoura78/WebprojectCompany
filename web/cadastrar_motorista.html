@@ -10,11 +10,11 @@
 <body>
     <div class="form-container">
         <h2>Cadastrar Motorista</h2>
-        <form>
-            <input type="text" placeholder="Nome do Motorista" required>
-            <input type="text" placeholder="CPF" required>
-            <input type="text" placeholder="Nº CNH" required>
-            <select required>
+        <form action="cadastrar_motorista" method="post">
+            <input type="text" name="nome_motorista" placeholder="Nome do Motorista" required>
+            <input type="text" name="cpf" placeholder="CPF" required>
+            <input type="text" name="numero_cnh" placeholder="Nº CNH" required>
+            <select name="categoria_cnh" required>
                 <option value="" disabled selected>Categoria CNH</option>
                 <option value="A">A</option>
                 <option value="B">B</option>
@@ -22,7 +22,7 @@
                 <option value="D">D</option>
                 <option value="E">E</option>
             </select>
-            <textarea placeholder="Cursos Adicionais"></textarea>
+            <textarea name="cursos_adicionais" placeholder="Cursos Adicionais"></textarea>
             <div class="button-group">
                 <button type="submit">Cadastrar</button>
                 <button type="button" onclick="window.location.href='menu.html'">Voltar</button>
@@ -31,3 +31,4 @@
     </div>
 </body>
 </html>
+

@@ -9,14 +9,14 @@
 <body>
     <div class="form-container">
         <h2>Cadastrar Atividade</h2>
-        <form>
-            <input type="text" placeholder="Nome do Motorista" required>
-            <input type="text" placeholder="Destino" required>
-            <input type="datetime-local" placeholder="Data e Horário de Saída" required>
-            <input type="datetime-local" placeholder="Data e Horário de Chegada" required>
-            <input type="number" placeholder="Km de Saída" required>
-            <input type="number" placeholder="Km de Chegada" required>
-            <textarea placeholder="Observações"></textarea>
+        <form action="cadastrar_atividade" method="post">
+            <input type="text" name="nome_motorista" placeholder="Nome do Motorista" required>
+            <input type="text" name="destino" placeholder="Destino" required>
+            <input type="datetime-local" name="data_horario_saida" placeholder="Data e Horário de Saída" required>
+            <input type="datetime-local" name="data_horario_chegada" placeholder="Data e Horário de Chegada" required>
+            <input type="number" name="km_saida" placeholder="Km de Saída" required>
+            <input type="number" name="km_chegada" placeholder="Km de Chegada" required>
+            <textarea name="observacoes" placeholder="Observações"></textarea>
             <div class="button-group">
                 <button type="submit">Cadastrar</button>
                 <button type="button" onclick="window.location.href='menu.html'">Voltar</button>
@@ -25,3 +25,5 @@
     </div>
 </body>
 </html>
+
+

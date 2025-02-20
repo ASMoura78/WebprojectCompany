@@ -1,26 +1,27 @@
 <!DOCTYPE html>
-<!DOCTYPE html>
+
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastrar Veículo</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <div class="form-container">
-        <h2>Cadastrar Veículo</h2>
-        <form>
-            <input type="text" placeholder="Modelo" required>
-            <input type="text" placeholder="Placa" required>
-            <input type="text" placeholder="Cor" required>
-            <input type="file" placeholder="Anexar Imagem" required>
-            <textarea placeholder="Observações"></textarea>
-            <div class="button-group">
-                <button type="submit">Cadastrar</button>
-                <button type="button" onclick="window.location.href='menu.html'">Voltar</button>
-            </div>
-        </form>
-    </div>
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Cadastrar Veículo</title>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+        <div class="form-container">
+            <h2>Cadastrar Veículo</h2>
+            <form action="cadastrar_veiculo" method="post" enctype="multipart/form-data">
+                <input type="text" name="modelo" placeholder="Modelo" required>
+                <input type="text" name="placa" placeholder="Placa" required>
+                <input type="text" name="cor" placeholder="Cor" required>
+                <input type="file" name="imagem" placeholder="Anexar Imagem" required>
+                <textarea name="observacoes" placeholder="Observações"></textarea>
+                <div class="button-group">
+                    <button type="submit">Cadastrar</button>
+                    <button type="button" onclick="window.location.href = 'menu.html'">Voltar</button>
+                </div>
+            </form>
+        </div>
+    </body>
 </html>
+

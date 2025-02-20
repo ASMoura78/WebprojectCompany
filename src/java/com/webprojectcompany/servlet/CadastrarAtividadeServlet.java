@@ -11,7 +11,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-
 @WebServlet("/cadastrar_atividade")
 public class CadastrarAtividadeServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -43,5 +42,6 @@ public class CadastrarAtividadeServlet extends HttpServlet {
         response.sendRedirect("sucesso.html");
     }
 }
+
 
 
