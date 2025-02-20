@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastrar Atividade</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="form-container">
+        <h2>Cadastrar Atividade</h2>
+        <form>
+            <input type="text" placeholder="Nome do Motorista" required>
+            <input type="text" placeholder="Destino" required>
+            <input type="datetime-local" placeholder="Data e Horário de Saída" required>
+            <input type="datetime-local" placeholder="Data e Horário de Chegada" required>
+            <input type="number" placeholder="Km de Saída" required>
+            <input type="number" placeholder="Km de Chegada" required>
+            <textarea placeholder="Observações"></textarea>
+            <div class="button-group">
+                <button type="submit">Cadastrar</button>
+                <button type="button" onclick="window.location.href='menu.html'">Voltar</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
