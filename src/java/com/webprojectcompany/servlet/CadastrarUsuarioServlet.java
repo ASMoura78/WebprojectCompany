@@ -19,8 +19,17 @@ public class CadastrarUsuarioServlet extends HttpServlet {
         String senha = request.getParameter("senha");
         String email = request.getParameter("email");
 
+        // Adicionando logs para verificar os valores recebidos
+        System.out.println("Nome de Usuário: " + nomeUsuario);
+        System.out.println("Senha: " + senha);
+        System.out.println("Email: " + email);
+
+        if (senha == null || senha.isEmpty()) {
+            throw new ServletException("A senha não pode estar vazia");
+        }
+
         try (Connection connection = DatabaseConnection.getConnection()) {
-            String sql = "INSERT INTO usuario (nome_usuario, senha, email) VALUES (?, ?, ?)";
+            String sql = "INSERT INTO usuarios (nome_usuario, senha_hash, email) VALUES (?, ?, ?)";
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
                 statement.setString(1, nomeUsuario);
                 statement.setString(2, senha);
