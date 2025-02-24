@@ -1,3 +1,10 @@
+<%-- 
+    Document   : cadastrar_atividade
+    Created on : 24 de fev. de 2025, 07:33:24
+    Author     : Alan Guedes
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -25,5 +32,3 @@
     </div>
 </body>
 </html>
-
-

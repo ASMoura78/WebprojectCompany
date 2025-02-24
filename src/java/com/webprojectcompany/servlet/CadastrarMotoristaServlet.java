@@ -42,14 +42,14 @@ public class CadastrarMotoristaServlet extends HttpServlet {
                 statement.setString(3, numeroCnh);
                 statement.setString(4, categoriaCnh);
                 statement.setString(5, cursosAdicionais);
-                statement.executeUpdate();
-                System.out.println("Dados inseridos com sucesso.");
-            } catch (SQLException e) {
-                System.out.println("Erro ao executar a instrução SQL: " + e.getMessage());
-                e.printStackTrace();
+                
+                // Adicionando log para verificar a execução da instrução SQL
+                int rowsInserted = statement.executeUpdate();
+                System.out.println("Rows inserted: " + rowsInserted);
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            System.out.println("Erro ao inserir dados no banco de dados: " + e.getMessage());
             throw new ServletException("Erro ao inserir dados no banco de dados", e);
         }
 

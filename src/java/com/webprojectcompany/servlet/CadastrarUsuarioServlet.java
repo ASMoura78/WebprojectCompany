@@ -6,6 +6,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.mindrot.jbcrypt.BCrypt;
+
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -19,20 +21,17 @@ public class CadastrarUsuarioServlet extends HttpServlet {
         String senha = request.getParameter("senha");
         String email = request.getParameter("email");
 
-        // Adicionando logs para verificar os valores recebidos
-        System.out.println("Nome de Usuário: " + nomeUsuario);
-        System.out.println("Senha: " + senha);
-        System.out.println("Email: " + email);
+        // Gerando o hash da senha usando bcrypt
+        String senhaHash = BCrypt.hashpw(senha, BCrypt.gensalt());
 
-        if (senha == null || senha.isEmpty()) {
-            throw new ServletException("A senha não pode estar vazia");
-        }
+        // Adicionando log para verificar o hash gerado
+        System.out.println("Hash da Senha: " + senhaHash);
 
         try (Connection connection = DatabaseConnection.getConnection()) {
             String sql = "INSERT INTO usuarios (nome_usuario, senha_hash, email) VALUES (?, ?, ?)";
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
                 statement.setString(1, nomeUsuario);
-                statement.setString(2, senha);
+                statement.setString(2, senhaHash); // Armazenando o hash da senha
                 statement.setString(3, email);
                 statement.executeUpdate();
             }
@@ -44,3 +43,6 @@ public class CadastrarUsuarioServlet extends HttpServlet {
         response.sendRedirect(request.getContextPath() + "/sucesso.html");
     }
 }
+
+
+

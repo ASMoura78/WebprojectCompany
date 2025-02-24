@@ -9,9 +9,9 @@
 <body>
     <div class="login-container">
         <h2>Login</h2>
-        <form>
-            <input type="text" placeholder="Usuário" required>
-            <input type="password" placeholder="Senha" required>
+        <form action="login" method="post"> <!-- Adicionei o atributo action -->
+            <input type="text" name="nome_usuario" placeholder="Usuário" required> <!-- Adicionei o atributo name -->
+            <input type="password" name="senha" placeholder="Senha" required> <!-- Adicionei o atributo name -->
             <button type="submit">Entrar</button>
             <a href="#">Esqueceu a senha?</a>
         </form>
@@ -19,3 +19,4 @@
     <script src="login.js"></script>
 </body>
 </html>
+
