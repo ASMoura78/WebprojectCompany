@@ -1,3 +1,10 @@
+<%-- 
+    Document   : cadastrar_motorista
+    Created on : 24 de fev. de 2025, 19:13:30
+    Author     : Alan Guedes
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
 <html lang="pt-BR">
@@ -31,4 +38,3 @@
         </div>
     </body>
 </html>
-

@@ -1,3 +1,10 @@
+<%-- 
+    Document   : menu
+    Created on : 24 de fev. de 2025, 19:22:38
+    Author     : Alan Guedes
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -50,4 +57,3 @@
     </div>
 </body>
 </html>
-
