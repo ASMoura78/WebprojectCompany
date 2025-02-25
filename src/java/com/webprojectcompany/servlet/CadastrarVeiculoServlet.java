@@ -1,52 +1,76 @@
-package com.webprojectcompany.servlet;
+package com.WebProjectCompany.servlet;
 
 import com.webprojectcompany.db.DatabaseConnection;
+import java.io.IOException;
+import java.io.InputStream;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.http.Part;
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Paths;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 
-@WebServlet("/cadastrar_veiculo")
+@WebServlet(name = "CadastrarVeiculoServlet", urlPatterns = {"/CadastrarVeiculoServlet"})
 @MultipartConfig
 public class CadastrarVeiculoServlet extends HttpServlet {
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private static final long serialVersionUID = 1L;
+
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
         String modelo = request.getParameter("modelo");
         String placa = request.getParameter("placa");
         String cor = request.getParameter("cor");
         String observacoes = request.getParameter("observacoes");
-        Part filePart = request.getPart("imagem");
-        String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
-        String uploadPath = getServletContext().getRealPath("") + File.separator + "uploads";
-        File uploadDir = new File(uploadPath);
-        if (!uploadDir.exists()) uploadDir.mkdir();
-        File file = new File(uploadPath, fileName);
-        filePart.write(file.getAbsolutePath());
+        Part imagemPart = request.getPart("imagem");
+        InputStream imagemInputStream = null;
 
-        try (Connection connection = DatabaseConnection.getConnection()) {
-            String sql = "INSERT INTO veiculo (modelo, placa, cor, imagem, observacoes) VALUES (?, ?, ?, ?, ?)";
-            try (PreparedStatement statement = connection.prepareStatement(sql)) {
-                statement.setString(1, modelo);
-                statement.setString(2, placa);
-                statement.setString(3, cor);
-                statement.setString(4, fileName);
-                statement.setString(5, observacoes);
-                statement.executeUpdate();
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            throw new ServletException("Erro ao inserir dados no banco de dados", e);
+        if (imagemPart != null && imagemPart.getSize() > 0) {
+            imagemInputStream = imagemPart.getInputStream();
         }
 
-        response.sendRedirect(request.getContextPath() + "/sucesso.html");
+        try (Connection conn = DatabaseConnection.getConnection()) {
+            String sql = "INSERT INTO cadastroveiculo (modelo, placa, cor, imagem, observacoes) VALUES (?, ?, ?, ?, ?)";
+            PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setString(1, modelo);
+            pst.setString(2, placa);
+            pst.setString(3, cor);
+            if (imagemInputStream != null) {
+                pst.setBlob(4, imagemInputStream);
+            } else {
+                pst.setNull(4, java.sql.Types.BLOB);
+            }
+            pst.setString(5, observacoes);
+            pst.executeUpdate();
+
+            HttpSession session = request.getSession();
+            session.setAttribute("message", "Veículo cadastrado com sucesso!");
+
+            response.sendRedirect("Cadastro_veiculos.jsp"); // Redireciona de volta para a página de cadastro
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
+
+    @Override
+    public String getServletInfo() {
+        return "Servlet para cadastrar veículos";
     }
 }
 

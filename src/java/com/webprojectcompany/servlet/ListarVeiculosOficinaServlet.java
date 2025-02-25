@@ -1,42 +1,51 @@
 package com.WebProjectCompany.servlet;
 
+
 import com.webprojectcompany.db.DatabaseConnection;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 
-@WebServlet(name = "CadastrarMotoristaServlet", urlPatterns = {"/CadastrarMotoristaServlet"})
-public class CadastrarMotoristaServlet extends HttpServlet {
+@WebServlet(name = "ListarVeiculosOficinaServlet", urlPatterns = {"/ListarVeiculosOficinaServlet"})
+public class ListarVeiculosOficinaServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String nome = request.getParameter("nome");
-        String cpf = request.getParameter("cpf");
-        String cnh = request.getParameter("cnh");
-        String categoria = request.getParameter("categoria");
-        String cursos = request.getParameter("cursos");
+
+        List<String> veiculos = new ArrayList<>();
+        List<String> placas = new ArrayList<>();
 
         try (Connection conn = DatabaseConnection.getConnection()) {
-            PreparedStatement pst = conn.prepareStatement("INSERT INTO cadastromotorista (nome, cpf, cnh, categoria, cursos) VALUES (?, ?, ?, ?, ?)");
-            pst.setString(1, nome);
-            pst.setString(2, cpf);
-            pst.setString(3, cnh);
-            pst.setString(4, categoria);
-            pst.setString(5, cursos);
-            pst.executeUpdate();
+            String sqlVeiculos = "SELECT modelo FROM cadastroveiculo";
+            String sqlPlacas = "SELECT placa FROM cadastroveiculo";
+            PreparedStatement pstVeiculos = conn.prepareStatement(sqlVeiculos);
+            PreparedStatement pstPlacas = conn.prepareStatement(sqlPlacas);
 
-            HttpSession session = request.getSession();
-            session.setAttribute("message", "Motorista cadastrado com sucesso!");
+            ResultSet rsVeiculos = pstVeiculos.executeQuery();
+            ResultSet rsPlacas = pstPlacas.executeQuery();
 
-            response.sendRedirect("Cadastro_Motorista.jsp"); // Redireciona de volta para a página de cadastro
+            while (rsVeiculos.next()) {
+                veiculos.add(rsVeiculos.getString("modelo"));
+            }
+            
+            while (rsPlacas.next()) {
+                placas.add(rsPlacas.getString("placa"));
+            }
+
+            request.setAttribute("veiculos", veiculos);
+            request.setAttribute("placas", placas);
+            request.getRequestDispatcher("Cadastro_oficina.jsp").forward(request, response);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -56,8 +65,6 @@ public class CadastrarMotoristaServlet extends HttpServlet {
 
     @Override
     public String getServletInfo() {
-        return "Short description";
+        return "Servlet para listar veículos e placas cadastradas";
     }
 }
-
-

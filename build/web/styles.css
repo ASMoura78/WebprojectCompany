@@ -1,190 +1,135 @@
-/* 
-    Created on : 15 de jan. de 2025, 18:38:36
-    Author     : Alan Guedes
-*/
+/* styles.css */
+
+/* Estilo básico do corpo */
 body {
-    font-family: 'Arial', sans-serif;
-    background-image: url('Imagens/logistica.png');
+    font-family: Arial, sans-serif;
+    background-color: #f0f8ff;
+    background-image: url('imagens/logistica.png');
     background-size: cover;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    margin: 0;
-    color: #333; /* Cor do texto */
+    margin: 0; /* Remover margens padrão */
 }
 
-/* Container de Login */
-.login-container {
-    background-color: rgba(255, 255, 255, 0.9);
-    padding: 40px;
-    border-radius: 8px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-    width: 320px;
-    text-align: center;
-}
-
-.login-container h2 {
-    margin-bottom: 20px;
-    color: #007bff; /* Cor do título */
-    font-size: 24px; /* Aumentar tamanho da fonte */
-    font-weight: bold; /* Negrito */
-}
-
-.login-container input {
-    width: 100%;
-    padding: 12px;
-    margin: 12px 0;
-    border: 1px solid #007bff;
-    border-radius: 4px;
-    font-size: 16px; /* Aumentar tamanho da fonte */
-}
-
-.login-container button {
-    background-color: #007bff;
-    color: white;
-    padding: 12px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    width: 100%;
-    font-size: 16px; /* Aumentar tamanho da fonte */
-    font-weight: bold; /* Negrito */
-}
-
-.login-container button:hover {
-    background-color: #0056b3;
-}
-
-.login-container a {
-    display: block;
-    margin-top: 10px;
-    color: #0056b3; /* Cor do link */
-    text-decoration: none;
-    font-size: 14px; /* Aumentar tamanho da fonte */
-}
-
-.login-container a:hover {
-    text-decoration: underline;
-}
-
-/* Container de Menu */
-.menu-container {
-    text-align: center;
+/* Estilo para containers principais */
+.cadastro-container, .login-container, .message-container {
+    background-color: #ffffff;
     padding: 20px;
-    color: #333; /* Cor do texto */
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 350px;
+   
 }
 
-.menu-container h2 {
-    margin-bottom: 20px;
-    color: #000; /* Cor do título */
-    font-size: 24px; /* Aumentar tamanho da fonte */
-    font-weight: bold; /* Negrito */
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Adicionar sombra ao texto */
+/* Estilo para containers main */
+.main-container {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 100%;
+    max-width: 1000px; /* Aumentar largura máxima para centralizar */
 }
 
-/* Estilos para o menu */
-.menu-buttons {
+/* Estilo para cabeçalhos */
+h2 {
+    color: #4CAF50;
+    text-shadow: 2px 2px 4px #aaa; /* Adicionar sombra ao texto */
+}
+
+/* Estilo para labels */
+label {
+    display: block;
+    margin: 10px 0 5px;
+    color: #333; /* Cor mais viva para o texto */
+}
+
+/* Estilo para inputs, selects e textareas */
+input, select, textarea {
+    width: 80%;
+    padding: 5px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Permitir redimensionamento vertical de textareas */
+textarea {
+    resize: vertical;
+}
+
+/* Estilo para alinhar botões na horizontal */
+.button-container {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
+    flex-wrap: wrap; /* Permitir quebra de linha quando necessário */
+    justify-content: center;
+    gap: 10px; /* Espaçamento entre os botões */
 }
 
-.menu-buttons button {
-    background-color: #000; /* Cor preta */
-    color: white;
-    padding: 12px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
+/* Estilos dos formulários dentro do contêiner dos botões */
+.form-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin: 10px;
-    width: 160px;
-    font-size: 16px; /* Aumentar tamanho da fonte */
-    font-weight: bold; /* Negrito */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adicionar sombra */
-}
-
-.menu-buttons button img {
-    width: 100px; /* Largura fixa da imagem */
-    height: 100px; /* Altura fixa da imagem */
-    object-fit: cover; /* Manter proporção da imagem */
-    margin-bottom: 10px;
-}
-
-.menu-buttons button:hover {
-    background-color: #333; /* Cor ao passar o mouse */
-}
-
-/* Container de Formulários de Cadastro */
-.form-container {
-    background-color: rgba(255, 255, 255, 0.9);
-    padding: 40px;
-    border-radius: 8px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-    width: 320px;
-    margin: 50px auto;
     text-align: center;
 }
 
-.form-container h2 {
-    margin-bottom: 20px;
-    color: #007bff; /* Cor do título */
-    font-size: 24px; /* Aumentar tamanho da fonte */
-    font-weight: bold; /* Negrito */
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Adicionar sombra ao texto */
-}
-
-.form-container input, .form-container textarea, .form-container select {
-    width: 100%;
-    padding: 12px;
-    margin: 12px 0;
-    border: 1px solid #007bff;
-    border-radius: 4px;
-    font-size: 16px; /* Aumentar tamanho da fonte */
-}
-
-/* Estilizar campo de texto */
-.form-container textarea {
-    height: 120px;
-    resize: none;
-}
-
-.form-container button {
-    background-color: #007bff;
+/* Estilo para botões */
+button {
+    background-color: #4CAF50;
     color: white;
-    padding: 12px;
+    padding: 10px 20px;
     border: none;
-    border-radius: 4px;
+    border-radius: 5px;
     cursor: pointer;
-    width: 100%;
-    font-size: 16px; /* Aumentar tamanho da fonte */
-    font-weight: bold; /* Negrito */
+    margin: 5px;
+    box-shadow: 2px 2px 4px #aaa; /* Adicionar sombra aos botões */
+    display: flex; /* Permitir que os botões fiquem na horizontal */
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px; /* Centraliza o botão no formulário */
 }
 
-.form-container button:hover {
-    background-color: #0056b3;
+/* Estilo para hover em botões */
+button:hover {
+    background-color: #45a049;
 }
 
-/* Grupo de Botões */
-.button-group {
+/* Estilo para imagens dentro dos botões */
+button img {
+    width: 80px;  /* Defina o tamanho da imagem conforme necessário */
+    height: 80px;
+    vertical-align: middle;
+    margin-right: 5px; /* Espaço entre a imagem e o texto */
+}
+
+/* Estilo para mensagens */
+.message {
+    font-weight: bold;
+    margin-top: 10px;
+    text-shadow: 1px 1px 3px #ccc; /* Adicionar sombra ao texto */
+}
+
+/* Estilo para mensagens de sucesso */
+.message.success {
+    color: #4CAF50;
+}
+
+/* Estilo para mensagens de erro */
+.message.error {
+    color: #FF6347;
+}
+
+/* Estilo para alinhar botões na horizontal */
+.button-container {
     display: flex;
-    justify-content: space-between;
-}
-
-.button-group button {
-    width: 48%;
-    font-size: 16px; /* Aumentar tamanho da fonte */
-    font-weight: bold; /* Negrito */
-}
-
-.button-group button:last-child {
-    background-color: #6c757d; /* Cor do botão Voltar */
-}
-
-.button-group button:last-child:hover {
-    background-color: #5a6268; /* Cor do botão Voltar ao passar o mouse */
+    flex-wrap: wrap; /* Permitir quebra de linha quando necessário */
+    justify-content: center;
+    gap: 10px; /* Espaçamento entre os botões */
 }
 

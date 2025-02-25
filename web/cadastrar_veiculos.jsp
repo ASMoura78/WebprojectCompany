@@ -6,28 +6,54 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-
-<html lang="pt-BR">
+<html>
     <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Cadastrar Veículo</title>
-        <link rel="stylesheet" href="styles.css">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Cadastro de Veículo</title>
+        <link rel="stylesheet" type="text/css" href="styles.css">
+        <script type="text/javascript">
+            // Função para limpar os campos do formulário
+            function clearForm() {
+                document.getElementById("modelo").value = "";
+                document.getElementById("placa").value = "";
+                document.getElementById("cor").value = "";
+                document.getElementById("imagem").value = "";
+                document.getElementById("observacoes").value = "";
+            }
+
+            window.onload = function() {
+                <% if (session.getAttribute("message") != null) { %>
+                    clearForm(); // Limpar os campos do formulário
+                <% } %>
+            };
+        </script>
     </head>
     <body>
-        <div class="form-container">
-            <h2>Cadastrar Veículo</h2>
-            <form action="cadastrar_veiculo" method="post" enctype="multipart/form-data">
-                <input type="text" name="modelo" placeholder="Modelo" required>
-                <input type="text" name="placa" placeholder="Placa" required>
-                <input type="text" name="cor" placeholder="Cor" required>
-                <input type="file" name="imagem" placeholder="Anexar Imagem" required>
-                <textarea name="observacoes" placeholder="Observações"></textarea>
-                <div class="button-group">
-                    <button type="submit">Cadastrar</button>
-                    <button type="button" onclick="window.location.href = 'menu.html'">Voltar</button>
-                </div>
+        <div class="cadastro-container">
+            <h2>Cadastro de Veículo</h2>
+            <form action="CadastrarVeiculoServlet" method="post" enctype="multipart/form-data">
+                <label for="modelo">Modelo:</label>
+                <input type="text" id="modelo" name="modelo" required><br><br>
+                <label for="placa">Placa:</label>
+                <input type="text" id="placa" name="placa" required><br><br>
+                <label for="cor">Cor:</label>
+                <input type="text" id="cor" name="cor" required><br><br>
+                <label for="imagem">Imagem do Veículo (Opcional):</label>
+                <input type="file" id="imagem" name="imagem"><br><br>
+                <label for="observacoes">Observações:</label>
+                <textarea id="observacoes" name="observacoes" rows="4" cols="50"></textarea><br><br>
+                <button type="submit">Cadastrar</button>
+                <button type="button" onclick="window.location.href='main.jsp'">Voltar</button>
             </form>
+            
+            <!-- Exibir mensagem de sucesso -->
+            <%
+                String message = (String) session.getAttribute("message");
+                if (message != null) {
+                    out.println("<p class='message success'>" + message + "</p>");
+                    session.removeAttribute("message");
+                }
+            %>
         </div>
     </body>
 </html>

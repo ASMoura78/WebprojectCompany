@@ -6,17 +6,23 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sucesso</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <div class="form-container">
-        <h2>Cadastro realizado com sucesso!</h2>
-        <button type="button" onclick="window.location.href='menu.html'">Voltar ao Início</button>
-    </div>
-</body>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Sucesso</title>
+        <link rel="stylesheet" type="text/css" href="styles.css">
+        <script type="text/javascript">
+            window.onload = function() {
+                setTimeout(function() {
+                    window.location.href = "main.jsp";
+                }, 2000); // Redireciona após 2 segundos
+            };
+        </script>
+    </head>
+    <body>
+        <div class="message-container">
+            <h2>Sucesso</h2>
+            <p class='message success'>Login efetuado com sucesso!</p>
+        </div>
+    </body>
 </html>
